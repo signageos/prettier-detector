@@ -144,6 +144,11 @@ if (cliOptions.help) {
 	process.stdout.write(usage);
 	process.exit(0);
 }
+
+if (cliOptions.verbose) {
+	Debug.enable('@signageos/prettier-detector*');
+}
+
 const filesPatterns = cliOptions.src;
 if (!filesPatterns) {
 	console.error(`Missing required argument [--src]`);
