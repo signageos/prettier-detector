@@ -1,0 +1,26 @@
+{
+  "name": "@signageos/prettier-detector",
+  "version": "0.0.0",
+  "description": "Reverse detecting of current code style to create initial .prettierrc config file",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/signageos/prettier-detector.git"
+  },
+  "keywords": [
+    "prettier",
+    "detector",
+    "reverse",
+    ".prettierrc",
+    "codestyle"
+  ],
+  "author": "signageOS <dev@signageos.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/signageos/prettier-detector/issues"
+  },
+  "homepage": "https://github.com/signageos/prettier-detector#readme"
+}
