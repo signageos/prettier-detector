@@ -4,5 +4,5 @@ Reverse detecting of current code style to create initial .prettierrc config fil
 
 ## Usage
 ```sh
-npx @signageos/prettier-detector src/**/*.ts -o parser=typescript
+npx @signageos/prettier-detector src/**/*.ts -o parser=typescript > .prettierrc
 ```
