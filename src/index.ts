@@ -216,13 +216,16 @@ async function detect(filesPatterns: string[]) {
 	const optionsRatings: IOptionsRating[] = [];
 
 	for (const optionKey of detectOptionKeys) {
+		debug('Detecting option', optionKey);
 		const currentlyWinningOptions = getWinningOptionsRating(optionsRatings)?.options ?? {};
+		debug('Currently winning options', currentlyWinningOptions);
 		for (const options of generatePossibleOptionsOfKey(optionKey, currentlyWinningOptions)) {
 
 			try {
 				let optionsDiffCount = 0;
 				const sourceDiffs: ISourceDiffs = {};
 				for (const filePath of filePaths) {
+					debug('Formatting file', filePath, options);
 					const originalSource = fs.readFileSync(filePath).toString();
 					const formattedSource = prettier.format(originalSource, { ...options, filepath: filePath });
 					const sourceDiff = diff.diffChars(originalSource, formattedSource);
