@@ -12,6 +12,7 @@
     "start": "echo 'Use the command \"./node_modules/.bin/ts-node src/index.ts\"'",
     "prepare": "rm -rf dist/* && tsc && chmod +x dist/index.js",
     "test": "jest",
+    "lint": "prettier src/**/*.ts --check",
     "check": "npm run depcheck && npx --userconfig ./.npmrc @signageos/lib check-deps",
     "depcheck": "depcheck --specials=tslint,webpack,jest,typescript --parsers='*.ts:typescript,*.js:es6' --detectors='requireCallExpression,importDeclaration' --ignore-dirs='dist' --ignores='@types/*,@signageos/codestyle,depcheck,ts-node,typescript'"
   },
