@@ -233,7 +233,7 @@ async function detect(filesPatterns: string[]) {
 					debug('Formatting file', filePath, options);
 					const originalSource = fs.readFileSync(filePath).toString();
 					const formattedSource = prettier.format(originalSource, { ...options, filepath: filePath });
-					const sourceDiff = diff.diffChars(originalSource, formattedSource);
+					const sourceDiff = diff.diffLines(originalSource, formattedSource);
 					for (const sourceChange of sourceDiff) {
 						optionsDiffCount += sourceChange.count ?? 0;
 					}
