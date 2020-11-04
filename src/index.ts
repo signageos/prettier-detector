@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 import * as prettier from 'prettier';
 import * as glob from 'glob';
