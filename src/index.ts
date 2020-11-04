@@ -42,7 +42,7 @@ function printDiff(sourceDiff: diff.Change[]) {
 /** All required adjustable options to detect against */
 type AdjustableOptions = Omit<
 	prettier.RequiredOptions,
-	'filepath' | 'plugins' // Exclude explicitly some options
+	'filepath' | 'plugins' | 'rangeStart' | 'rangeEnd' // Exclude explicitly some options
 >;
 
 /**
@@ -65,8 +65,6 @@ const DEFAULT_ADJUSTABLE_OPTION_VARIANTS: IOptionsVariants = {
 	trailingComma: ['all', 'es5', 'none'],
 	bracketSpacing: [true, false],
 	jsxBracketSameLine: [true, false],
-	rangeStart: [0, 1], // usually used values (TODO allow parametrize this)
-	rangeEnd: [0, 1, Infinity], // usually used values (TODO allow parametrize this)
 	parser: [
 		'babel',
 		'babel-flow',
