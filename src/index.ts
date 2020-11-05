@@ -39,6 +39,19 @@ function printDiff(sourceDiff: diff.Change[]) {
 	}
 }
 
+function parseOptionValue(optionValue: string) {
+	if (optionValue === 'true') {
+		return true;
+	}
+	if (optionValue === 'false') {
+		return false;
+	}
+	if (!isNaN(parseInt(optionValue))) {
+		return parseInt(optionValue);
+	}
+	return optionValue;
+}
+
 /** All required adjustable options to detect against */
 type AdjustableOptions = Omit<
 	prettier.RequiredOptions,
@@ -162,7 +175,7 @@ if (detectOptionKeys.some((option: keyof IOptionsVariants) => !AVAILABLE_OPTION_
 const specifiedOptionsRaw = cliOptions['specified-option'] ?? [];
 const specifiedOptionVariants: IOptionsVariants = specifiedOptionsRaw.reduce((agg: IOptionsVariants, option: string) => ({
 	...agg,
-	[option.split('=')[0]]: [option.split('=')[1]],
+	[option.split('=')[0]]: [parseOptionValue(option.split('=')[1])],
 }), {});
 if (Object.keys(specifiedOptionVariants).some(
 	(key: keyof IOptionsVariants) => !DEFAULT_ADJUSTABLE_OPTION_VARIANTS[key as keyof IOptionsVariants]?.includes(specifiedOptionVariants[key]![0] as never)
