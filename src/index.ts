@@ -166,7 +166,7 @@ if (!filesPatterns) {
 	process.exit(1);
 }
 
-const detectOptionKeys = cliOptions['detect-option'] ?? AVAILABLE_OPTION_KEYS;
+const detectOptionKeys: (keyof IOptionsVariants)[] = cliOptions['detect-option'] ?? AVAILABLE_OPTION_KEYS;
 if (detectOptionKeys.some((option: keyof IOptionsVariants) => !AVAILABLE_OPTION_KEYS.includes(option))) {
 	console.error(`Incorrect --detect-option`);
 	console.error(detectOptionKeys);
@@ -192,6 +192,11 @@ const adjustableOptionVariants: IOptionsVariants = {
 	),
 	...specifiedOptionVariants,
 };
+
+const DEFAULT_OPTIONS = detectOptionKeys.reduce<prettier.Options>(
+	(opts, key) => ({ ...opts, [key]: adjustableOptionVariants[key]![0] }),
+	{},
+);
 
 function* generatePossibleOptionsOfKey(optionKey: keyof IOptionsVariants, defaultOptions: prettier.Options) {
 	for (const optionValue of adjustableOptionVariants[optionKey]!) {
@@ -233,7 +238,7 @@ async function detect(filesPatterns: string[]) {
 
 	for (const optionKey of detectOptionKeys) {
 		debug('Detecting option', optionKey);
-		const currentlyWinningOptions = getWinningOptionsRating(optionsRatings)?.options ?? {};
+		const currentlyWinningOptions = getWinningOptionsRating(optionsRatings)?.options ?? DEFAULT_OPTIONS;
 		debug('Currently winning options', currentlyWinningOptions);
 		for (const options of generatePossibleOptionsOfKey(optionKey, currentlyWinningOptions)) {
 
